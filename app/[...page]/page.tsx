@@ -3,13 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { existsSync, readFileSync } from "fs";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
  
  
-export async function generateMetadata(
-  { params }: { params: Promise<{ page: string[] }> },
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ page: string[] }> },): Promise<Metadata> {
   const { page: pageArray } = await params;
   const filePath = `wiki/${decodeURIComponent(pageArray.join("/"))}.md`;
   let pageName;
