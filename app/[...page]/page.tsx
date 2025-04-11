@@ -3,7 +3,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { existsSync, readFileSync } from "fs";
 import Link from "next/link";
 import Markdown from "react-markdown";
-
+import type { Metadata, ResolvingMetadata } from 'next'
+ 
+ 
+export async function generateMetadata(
+  { params }: { params: Promise<{ page: string[] }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { page: pageArray } = await params;
+  const filePath = `wiki/${decodeURIComponent(pageArray.join("/"))}.md`;
+  let pageName;
+  if (existsSync(filePath)) {
+    pageName = filePath.split("/").pop()?.replace(".md", "") || "Untitled";
+  } else {
+    pageName = "404 Error";
+  }
+ 
+  return {
+    title: pageName
+  }
+}
 export default async function Page({ params }: { params: Promise<{ page: string[] }> }) {
   const { page: pageArray } = await params;
   const filePath = `wiki/${decodeURIComponent(pageArray.join("/"))}.md`;

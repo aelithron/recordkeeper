@@ -1,7 +1,12 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { readFileSync, existsSync } from "fs";
+import { Metadata } from "next";
 import Markdown from "react-markdown";
+
+export const metadata: Metadata = {
+  title: "Home | Recordkeeper",
+}
 
 export default function Home() {
   let file;
