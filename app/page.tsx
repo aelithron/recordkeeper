@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="p-8 md:p-20 flex flex-col gap-2 items-center">
-      <h1 className="text-3xl font-semibold"><FontAwesomeIcon icon={faHome} /> Home</h1>
+      <h1 className="text-3xl font-semibold mb-2"><FontAwesomeIcon icon={faHome} /> Home</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <Markdown>{file}</Markdown>
       </div>
