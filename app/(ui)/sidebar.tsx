@@ -16,7 +16,7 @@ export default function Sidebar({ pages }: { pages: WikiLink[] }) {
   }
 
   return (
-    <div className="bg-slate-500 flex flex-col gap-2 w-1/4 h-full fixed top-0 left-0 z-50 overflow-y-auto">
+    <div className="bg-slate-500 flex flex-col gap-2 opacity-97 w-screen md:w-1/4 h-full fixed top-0 left-0 z-50 overflow-y-auto">
       <div className="flex justify-between">
         <button onClick={() => setIsOpen(!isOpen)} className="px-3 py-2 ml-4 mt-4 text-left hover:text-sky-500 text-white"><FontAwesomeIcon icon={faBars} /></button>
         <a href="https://github.com/aelithron/recordkeeper" target="_blank" className="px-3 py-2 mr-4 mt-4 text-left hover:text-sky-500 text-white"><FontAwesomeIcon icon={faGithub} /></a>
