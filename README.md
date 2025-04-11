@@ -41,3 +41,5 @@ Congrats on installing Recordkeeper! It will create a folder called wiki in your
 - Email-based authentication for editors
 - Downloader (simple script that compiles all of the pages and turns them into a zip file for the user)
 - Kubernetes manifests
+## Credits
+This project uses some [Font Awesome](https://fontawesome.com) and [Twemoji](https://github.com/twitter/twemoji) icons throughout.

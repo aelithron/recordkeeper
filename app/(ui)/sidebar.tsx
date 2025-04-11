@@ -3,9 +3,11 @@ import type { WikiLink } from "@/types";
 import { faBars, faFile, faFolder, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import logo from "@/public/logo.webp";
 
 export default function Sidebar({ pages }: { pages: WikiLink[] }) {
   const pathName = usePathname();
@@ -21,7 +23,10 @@ export default function Sidebar({ pages }: { pages: WikiLink[] }) {
         <button onClick={() => setIsOpen(!isOpen)} className="px-3 py-2 ml-4 mt-4 text-left hover:text-sky-500 text-white"><FontAwesomeIcon icon={faBars} /></button>
         <a href="https://github.com/aelithron/recordkeeper" target="_blank" className="px-3 py-2 mr-4 mt-4 text-left hover:text-sky-500 text-white"><FontAwesomeIcon icon={faGithub} /></a>
       </div>
-      <h1 className="font-semibold text-xl text-center">Recordkeeper</h1>
+      <div className="flex items-center gap-2 justify-center mb-4">
+        <Image src={logo} width={25} height={25} alt="Emoji: A stack of books" />
+        <h1 className="font-semibold text-xl text-center">Recordkeeper</h1>
+      </div>
       {pages.map((link) => (
         <div key={link.path}>
           {link.type === "folder" && <div>
