@@ -4,8 +4,9 @@ import { existsSync, readFileSync } from "fs";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
-export default async function Page({ params }: { params: { page: string[] } }) {
-  const filePath = `wiki/${decodeURIComponent((await params).page.join("/"))}.md`;
+export default async function Page({ params }: { params: { page: Promise<string[]> } }) {
+  const pageArray = await params.page;
+  const filePath = `wiki/${decodeURIComponent(pageArray.join("/"))}.md`;
   let file;
   let pageName;
   let error = false;
