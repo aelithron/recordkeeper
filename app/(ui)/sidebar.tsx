@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 export default function Sidebar({ pages }: { pages: WikiLink[] }) {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [path, setPath] = useState<string>("/");
+  const [openFolder, setOpenFolder] = useState<string>("");
   if (!isOpen) {
     return <button onClick={() => setIsOpen(!isOpen)} className="rounded-full bg-slate-500 px-3 py-2 ml-4 mt-4 fixed hover:text-sky-500 text-white"><FontAwesomeIcon icon={faBars} /></button>;
   }
@@ -20,17 +20,32 @@ export default function Sidebar({ pages }: { pages: WikiLink[] }) {
       <h1 className="font-semibold text-xl text-center">Recordkeeper</h1>
       {pages.map((link) => (
         <div key={link.path}>
-          {link.type === "folder" && <button onClick={() => {setPath(link.path)}} className="flex items-center gap-2 text-white hover:text-sky-500 ml-6">
-            <FontAwesomeIcon icon={faFolder} /> {link.name}
-          </button>}
-          {link.type === "file" && <Link
-            href={link.path}
+          {link.type === "folder" && <div>
+            <button onClick={() => openFolder === link.path ? setOpenFolder("") : setOpenFolder(link.path)} className="flex items-center gap-2 text-white hover:text-sky-500 ml-6">
+              <FontAwesomeIcon icon={faFolder} /> {link.name}
+            </button>
+            {openFolder === link.path && <div className="ml-6">
+              {link.children?.map((child) => (
+                <Link
+                  key={child.path}
+                  href={`/${child.path}`}
+                  className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FontAwesomeIcon icon={faFile} />
+                  <span className={`${pathName === `/${child.path}` && "underline"}`}>{child.name}</span>
+                </Link>
+              ))}
+            </div>}
+          </div>}
+          {(link.type === "file" || link.type === "home") && <Link
+            href={`/${link.path}`}
             className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
             onClick={() => setIsOpen(false)}
           >
             {link.type === "file" && <FontAwesomeIcon icon={faFile} />}
             {link.type === "home" && <FontAwesomeIcon icon={faHome} />}
-            <span className={`${pathName === link.path && "underline"}`}>{link.name}</span>
+            <span className={`${pathName === `/${link.path}` && "underline"}`}>{link.name}</span>
           </Link>}
         </div>
       ))}

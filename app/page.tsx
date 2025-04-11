@@ -9,7 +9,7 @@ export default function Home() {
     file = readFileSync("wiki/index.md").toString();
   } else {
     file = "# The wiki has no `index.md` file! This is an error, please create one!"
-    console.error("The wiki has no `index.md` file! This is an error, please create one!");
+    console.error("The wiki has no index.md file! This is an error, please create one!");
   }
 
   return (
