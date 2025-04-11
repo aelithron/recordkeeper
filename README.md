@@ -17,9 +17,9 @@ services:
     image: ghcr.io/aelithron/recordkeeper:latest
     container_name: recordkeeper
     ports:
-      - "9898:9898"
+      - "3000:3000"
     volumes:
-      - ./wiki:/wiki
+      - ./wiki:/app/wiki
     restart: unless-stopped
 ```
 Then, simply run `docker compose up -d` in the directory of the file, and continue to "After Installation" below.
@@ -28,11 +28,11 @@ Run the following command on your server or computer:
 ```bash
 docker run -d \
   --name recordkeeper \
-  -p 9898:9898 \
-  -v $(pwd)/wiki:/wiki \
+  -p 3000:3000 \
+  -v $(pwd)/wiki:/app/wiki \
   --restart unless-stopped \
   ghcr.io/aelithron/recordkeeper:latest
 ```
 Then, continue to "After Installation" below.
 ### After Installation
-Congrats on installing Recordkeeper! It will create a folder called wiki in your current folder, which will store all of your Markdown files for wiki pages. Also, the server exposes itself on port `9898` by default, though you can change this with the Docker bind.
+Congrats on installing Recordkeeper! It will create a folder called wiki in your current folder, which will store all of your Markdown files for wiki pages. Also, the server exposes itself on port `3000` by default, though you can change this with the Docker bind. **DO NOT** edit the right side of the volume mount, though you can move the left side if you want.
