@@ -4,12 +4,13 @@ import { existsSync, readFileSync } from "fs";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
-export default async function Page({ params }: { params: { page: Promise<string[]> } }) {
-  const pageArray = await params.page;
+export default async function Page({ params }: { params: Promise<{ page: string[] }> }) {
+  const { page: pageArray } = await params;
   const filePath = `wiki/${decodeURIComponent(pageArray.join("/"))}.md`;
   let file;
   let pageName;
   let error = false;
+
   if (existsSync(filePath)) {
     file = readFileSync(filePath).toString();
     pageName = filePath.split("/").pop()?.replace(".md", "") || "Untitled";
