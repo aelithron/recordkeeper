@@ -20,17 +20,22 @@ export function getPageList(): WikiLink[] {
 
       const subEntries = readdirSync(path, { withFileTypes: true });
       for (const subEntry of subEntries) {
-        if (!subEntry.isDirectory()) {
-          const subPath = subEntry.name.replace(/\.md$/, "");
-          const fileName = subPath.replace(/\.[^/.]+$/, "");
-          if (fileName === "index") continue;
-
-          folderLink.children?.push({
-            name: fileName,
-            path: `${finalPath}/${subPath}`,
-            type: "file",
-          });
+        if (subEntry.isDirectory()) {
+          console.warn(
+        `Subdirectories within subdirectories are not supported and will not be rendered: ${path}/${subEntry.name}`
+          );
+          continue;
         }
+
+        const subPath = subEntry.name.replace(/\.md$/, "");
+        const fileName = subPath.replace(/\.[^/.]+$/, "");
+        if (fileName === "index") continue;
+
+        folderLink.children?.push({
+          name: fileName,
+          path: `${finalPath}/${subPath}`,
+          type: "file",
+        });
       }
 
       links.push(folderLink);

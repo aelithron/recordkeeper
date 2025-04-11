@@ -1,26 +1,30 @@
-import { faFile } from "@fortawesome/free-solid-svg-icons";
+import { faFile, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { existsSync, readFileSync } from "fs";
-import ReactMarkdown from "react-markdown";
+import Link from "next/link";
+import Markdown from "react-markdown";
 
 export default async function Page({ params }: { params: { page: string[] } }) {
-  const filePath = `wiki/${(await(params)).page.join("/")}.md`;
+  const filePath = `wiki/${decodeURIComponent((await params).page.join("/"))}.md`;
   let file;
   let pageName;
+  let error = false;
   if (existsSync(filePath)) {
     file = readFileSync(filePath).toString();
     pageName = filePath.split("/").pop()?.replace(".md", "") || "Untitled";
   } else {
     file = "The page you are looking for does not exist. Please check the URL and try again.";
     pageName = "404 Error";
+    error = true;
   }
 
   return (
-    <div className="p-8 md:p-20 flex flex-col gap-2">
+    <div className="p-8 md:p-20 flex flex-col gap-2 items-center">
       <h1 className="text-3xl font-semibold"><FontAwesomeIcon icon={faFile} /> {pageName}</h1>
       <div className="prose prose-neutral dark:prose-invert">
-        <ReactMarkdown>{file}</ReactMarkdown>
+        <Markdown>{file}</Markdown>
       </div>
+      {error && <Link href="/" className="hover:text-sky-500 bg-slate-500 rounded-full p-2"><FontAwesomeIcon icon={faHome} /> Go to Home</Link>}
     </div>
   );
 }
