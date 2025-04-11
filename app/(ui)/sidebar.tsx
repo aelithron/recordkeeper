@@ -37,7 +37,7 @@ export default function Sidebar({ pages }: { pages: WikiLink[] }) {
                   onClick={() => setIsOpen(false)}
                 >
                   <FontAwesomeIcon icon={faFile} />
-                  <span className={`${pathName === `/${child.path}` && "underline"}`}>{child.name}</span>
+                  <span className={`${decodeURIComponent(pathName) === `/${child.path}` && "underline"}`}>{child.name}</span>
                 </Link>
               ))}
             </div>}
@@ -49,7 +49,7 @@ export default function Sidebar({ pages }: { pages: WikiLink[] }) {
           >
             {link.type === "file" && <FontAwesomeIcon icon={faFile} />}
             {link.type === "home" && <FontAwesomeIcon icon={faHome} />}
-            <span className={`${pathName === `/${link.path}` && "underline"}`}>{link.name}</span>
+            <span className={`${decodeURIComponent(pathName) === `/${link.path}` && "underline"}`}>{link.name}</span>
           </Link>}
         </div>
       ))}
