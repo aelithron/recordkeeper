@@ -36,3 +36,8 @@ docker run -d \
 Then, continue to "After Installation" below.
 ### After Installation
 Congrats on installing Recordkeeper! It will create a folder called wiki in your current folder, which will store all of your Markdown files for wiki pages. Also, the server exposes itself on port `3000` by default, though you can change this with the Docker bind. **DO NOT** edit the right side of the volume mount, though you can move the left side if you want.
+## Planned Features
+- Web-based Markdown page editor
+- Email-based authentication for editors
+- Downloader (simple script that compiles all of the pages and turns them into a zip file for the user)
+- Kubernetes manifests
