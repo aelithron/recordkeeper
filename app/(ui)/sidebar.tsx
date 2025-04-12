@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import logo from "@/public/logo.webp";
 
+export const dynamic = 'force-dynamic';
+
 export default function Sidebar({ pages }: { pages: WikiLink[] }) {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
