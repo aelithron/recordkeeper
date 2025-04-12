@@ -42,7 +42,7 @@ export default function EditPage({ pageContent, path }: { pageContent: string, p
         <button
           type="submit"
           className="bg-green-500 text-white rounded-xl p-2 hover:text-sky-500"
-          onClick={(e) => handleSave(e)}
+          
         >
           <FontAwesomeIcon icon={faSave} className="mr-2" />
           Save Changes
