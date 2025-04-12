@@ -16,6 +16,9 @@ services:
   recordkeeper:
     image: ghcr.io/aelithron/recordkeeper:latest
     container_name: recordkeeper
+    environment:
+      - WEBEDITOR: false
+      - WEBEDITOR_PASSWORD: "Set a password here"
     ports:
       - "3000:3000"
     volumes:
@@ -28,6 +31,8 @@ Run the following command on your server or computer:
 ```bash
 docker run -d \
   --name recordkeeper \
+  -e WEBEDITOR=false \
+  -e WEBEDITOR_PASSWORD="Set a password here" \
   -p 3000:3000 \
   -v $(pwd)/wiki:/app/wiki \
   --restart unless-stopped \
@@ -36,9 +41,12 @@ docker run -d \
 Then, continue to "After Installation" below.
 ### After Installation
 Congrats on installing Recordkeeper! It will create a folder called wiki in your current folder, which will store all of your Markdown files for wiki pages. Also, the server exposes itself on port `3000` by default, though you can change this with the Docker bind. **DO NOT** edit the right side of the volume mount, though you can move the left side if you want.
+#### Enabling the Web Editor
+If enabling the Web Editor, alter your installation method's Environment Variables to contain:
+- `WEBEDITOR_PASSWORD` set to a valid password
+- `WEBEDITOR` set to `true`
+Then, 
 ## Planned Features
-- Web-based Markdown page editor
-- Email-based authentication for editors
 - Downloader (simple script that compiles all of the pages and turns them into a zip file for the user)
 - Kubernetes manifests
 ## Credits

@@ -1,6 +1,6 @@
 "use client";
 import type { WikiLink } from "@/types";
-import { faBars, faFile, faFolder, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faFile, faFolder, faHome, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +11,7 @@ import logo from "@/public/logo.webp";
 
 export const dynamic = 'force-dynamic';
 
-export default function Sidebar({ pages }: { pages: WikiLink[] }) {
+export default function Sidebar({ pages, webEditorEnabled }: { pages: WikiLink[], webEditorEnabled: boolean }) {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openFolder, setOpenFolder] = useState<string>("");
@@ -60,6 +60,12 @@ export default function Sidebar({ pages }: { pages: WikiLink[] }) {
           </Link>}
         </div>
       ))}
+      {webEditorEnabled && <Link
+        href={`/edit`}
+        className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
+        onClick={() => setIsOpen(false)}>
+        <FontAwesomeIcon icon={faPencil} />
+      </Link>}
     </div>
   );
 }

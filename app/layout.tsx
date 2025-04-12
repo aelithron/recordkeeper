@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${roboto.className} antialiased`}
       >
-        <Sidebar pages={getPageList()} />
+        <Sidebar pages={getPageList()} webEditorEnabled={process.env.WEBEDITOR === "true"} />
         {children}
       </body>
     </html>
