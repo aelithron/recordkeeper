@@ -32,7 +32,7 @@ export default function EditPage({ pageContent, path }: { pageContent: string, p
   return (
     <form className="flex flex-col gap-2 justify-center items-center text-center">
       <textarea
-        className="w-[200%] p-4 border border-gray-300 rounded-md"
+        className="w-full max-w-screen-md md:w-[200%] p-4 border border-gray-300 rounded-md"
         value={content}
         rows={10}
         onChange={(e) => setContent(e.target.value)}
