@@ -7,6 +7,7 @@ import Markdown from "react-markdown";
 export const metadata: Metadata = {
   title: "Home | Recordkeeper",
 }
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   let file;
