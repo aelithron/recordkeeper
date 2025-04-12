@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { existsSync, writeFileSync } from "fs";
+import { resolve, join } from "path";
 
 export async function PATCH(req: NextRequest) {
   let body;
@@ -12,10 +13,19 @@ export async function PATCH(req: NextRequest) {
   let { path } = body;
   const { content } = body;
   if (!path || !content) { return NextResponse.json({ error: "Path and content arguments are required." }, { status: 400 }); }
-
   if (path === "/") { path = "index"; }
-  const filePath = `wiki/${decodeURIComponent(path)}.md`;
-  if (!existsSync(filePath)) { return NextResponse.json({ error: "File does not exist." }, { status: 404 }); }
+
+  // Resolve the file path and ensure it stays within the /wiki directory
+  const baseDir = resolve("wiki");
+  const filePath = resolve(join(baseDir, `${decodeURIComponent(path)}.md`));
+
+  if (!filePath.startsWith(baseDir)) {
+    return NextResponse.json({ error: "Invalid path. Cannot write outside of /wiki." }, { status: 400 });
+  }
+
+  if (!existsSync(filePath)) {
+    return NextResponse.json({ error: "File does not exist." }, { status: 404 });
+  }
 
   try {
     writeFileSync(filePath, content);
