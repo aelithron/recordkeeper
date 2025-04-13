@@ -14,7 +14,7 @@ export default function ListPages({ pages }: { pages: WikiLink[] }) {
       {pages.map((link) => (
         <div key={link.path} className="flex flex-col gap-2">
           {link.type === "folder" && <div>
-            <button onClick={() => openFolder === link.path ? setOpenFolder("") : setOpenFolder(link.path)} className="flex items-center gap-2 text-white hover:text-sky-500 ml-6">
+            <button onClick={() => openFolder === link.path ? setOpenFolder("") : setOpenFolder(link.path)} className="flex items-center gap-2  hover:text-sky-500 ml-6">
               <FontAwesomeIcon icon={faFolder} /> {link.name}
             </button>
             {openFolder === link.path && <div className="ml-6">
@@ -22,7 +22,7 @@ export default function ListPages({ pages }: { pages: WikiLink[] }) {
                 <Link
                   key={child.path}
                   href={`/edit/${child.path}`}
-                  className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
+                  className="flex items-center gap-2 hover:text-sky-500 ml-6"
                 >
                   <FontAwesomeIcon icon={faFile} />
                   <span>{child.name}</span>
@@ -32,14 +32,14 @@ export default function ListPages({ pages }: { pages: WikiLink[] }) {
           </div>}
           {(link.type === "file") && <Link
             href={`/edit/${link.path}`}
-            className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
+            className="flex items-center gap-2 hover:text-sky-500 ml-6"
           >
             <FontAwesomeIcon icon={faFile} />
             <span>{link.name}</span>
           </Link>}
           {(link.type === "home") && <Link
             href={`/edit/index`}
-            className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
+            className="flex items-center gap-2 hover:text-sky-500 ml-6"
           >
             <FontAwesomeIcon icon={faHome} />
             <span>{link.name}</span>
