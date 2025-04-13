@@ -48,8 +48,8 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/wiki ./wiki
-COPY --from=builder /app/wiki ./default-wiki
+COPY --from=builder --chown=nextjs:nodejs /app/wiki ./wiki
+COPY --from=builder --chown=nextjs:nodejs /app/wiki ./default-wiki
 
 COPY docker-start.sh /app/start.sh
 RUN chmod +x /app/start.sh
