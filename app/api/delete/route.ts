@@ -6,7 +6,7 @@ export async function DELETE(req: NextRequest) {
   if (process.env.WEBEDITOR !== "true") {
     return NextResponse.json({ error: "Web editor is disabled." }, { status: 403 });
   }
-  if (!(req.headers.get("authorization") === ("Bearer " + process.env.WEBEDITOR_PASSWORD))) {
+  if (!(decodeURIComponent(req.headers.get("authorization") || "") === ("Bearer " + process.env.WEBEDITOR_PASSWORD))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   let body;

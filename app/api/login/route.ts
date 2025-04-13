@@ -3,7 +3,7 @@ import { rateLimit } from '@/lib/rateLimit';
 
 export async function POST(req: Request) {
   if (process.env.WEBEDITOR !== 'true') {
-    return NextResponse.json({ error: 'Web editor is disabled' }, { status: 403 });
+    return NextResponse.json({ error: 'Web editor is disabled!' }, { status: 403 });
   }
   const ip = req.headers.get('x-forwarded-for') || 'unknown';
   if (rateLimit(ip)) {
@@ -18,9 +18,9 @@ export async function POST(req: Request) {
       sameSite: 'strict',
       maxAge: 60 * 60 * 24 * 7,
     });
-    console.log(`[auth] Successful login attempt at ${Date.now} from IP`, ip);
+    console.log(`[auth] Successful login attempt at ${Date.now().toString()} from IP`, ip);
     return res;
   }
-  console.log(`[auth] Failed login attempt at ${Date.now()} from IP`, ip);
+  console.log(`[auth] Failed login attempt at ${Date.now().toString()} from IP`, ip);
   return NextResponse.json({ success: false }, { status: 401 });
 }
