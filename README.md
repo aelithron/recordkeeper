@@ -43,6 +43,7 @@ Then, continue to "After Installation" below. Your `wiki` directory will be in y
 This is my (ael's) personally preferred method for installing Recordkeeper!
 1. Download the `manifests.yaml` file. You can find it [by clicking here](https://raw.githubusercontent.com/aelithron/recordkeeper/refs/heads/main/manifests.yaml), or in the repo (the link is just to the raw version of the one here in this repo).
 2. Make any other needed changes for your setup, such as changing the storage location, setting a different Namespace, or increasing the number of replicas.
+3. Run the command `kubectl apply -f (location of your manifest)`.
 > Note: if you want to use Recordkeeper with Traefik on Kubernetes, feel free to dm me (@aelithron on discord), i've already configured it but it's a bit too unique to put here.
 Finally, continue to "After Installation" below. Your `wiki` directory is at `/usr/share/recordkeeper/wiki` by default.
 ### After Installation
