@@ -17,8 +17,8 @@ services:
     image: ghcr.io/aelithron/recordkeeper:latest
     container_name: recordkeeper
     environment:
-      - WEBEDITOR: false
-      - WEBEDITOR_PASSWORD: "Set a password here"
+      WEBEDITOR: false
+      WEBEDITOR_PASSWORD: "Set a password here"
     ports:
       - "3000:3000"
     volumes:

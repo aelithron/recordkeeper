@@ -40,6 +40,8 @@ RUN \
 FROM base AS runner
 WORKDIR /app
 
+RUN apk add --no-cache su-exec
+
 ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED=1
@@ -50,6 +52,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/wiki ./wiki
 COPY --from=builder --chown=nextjs:nodejs /app/wiki ./default-wiki
+RUN mkdir -p /app/wiki && chown -R nextjs:nodejs /app/wiki /app/default-wiki
 
 COPY docker-start.sh /app/start.sh
 RUN chmod +x /app/start.sh
@@ -59,7 +62,8 @@ RUN chmod +x /app/start.sh
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-USER nextjs
+# Note: This runs as root because start.sh drops it down to the nextjs user later - ael
+USER root
 
 EXPOSE 3000
 ENV PORT=3000
