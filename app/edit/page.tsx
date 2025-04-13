@@ -8,6 +8,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Edit Pages",
 }
+export const dynamic = 'force-dynamic';
 
 export default function Page() {
   if (process.env.WEBEDITOR !== "true") {

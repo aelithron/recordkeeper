@@ -1,6 +1,12 @@
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LoginForm from "./login.form";
+import { Metadata } from "next";
+
+export const dynamic = 'force-dynamic';
+export const metadata: Metadata = {
+  title: "Web Editor Login"
+}
 
 export default function Page() {
   return (
