@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { existsSync, writeFileSync } from "fs";
+import { existsSync, rmSync, readdirSync, rmdir } from "fs";
 import { resolve, join } from "path";
 
-export async function PATCH(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   if (process.env.WEBEDITOR !== "true") {
     return NextResponse.json({ error: "Web editor is disabled." }, { status: 403 });
   }
@@ -16,10 +16,8 @@ export async function PATCH(req: NextRequest) {
     console.warn("Error parsing JSON (likely client's fault):", error);
     return NextResponse.json({ error: "Invalid JSON data/format!" }, { status: 400 });
   }
-  let { path } = body;
-  const { content } = body;
-  if (!path || !content) { return NextResponse.json({ error: "Path and content arguments are required." }, { status: 400 }); }
-  if (path === "/") { path = "index"; }
+  const { path } = body;
+  if (!path) { return NextResponse.json({ error: "Path argument is required." }, { status: 400 }); }
 
   const baseDir = resolve("wiki");
   const filePath = resolve(join(baseDir, `${decodeURIComponent(path)}.md`));
@@ -32,10 +30,19 @@ export async function PATCH(req: NextRequest) {
   }
 
   try {
-    writeFileSync(filePath, content);
-    return NextResponse.json({ message: "Successfully written content!" });
+    rmSync(filePath);
+    const dirPath = resolve(join(baseDir, decodeURIComponent(path).replace(/\/[^/]+$/, "")));
+    if (existsSync(dirPath) && (readdirSync(dirPath).length === 0)) {
+      rmdir(dirPath, (err) => {
+        if (err) {
+          console.error("Successfully deleted page, error deleting directory:", err);
+          return NextResponse.json({ error: "Successfully deleted page, but error deleting directory." }, { status: 500 });
+        }
+      })
+    }
+    return NextResponse.json({ message: "Successfully deleted page!" });
   } catch (error) {
-    console.error("Error writing file:", error);
-    return NextResponse.json({ error: "Error writing file." }, { status: 500 });
+    console.error("Error deleting file:", error);
+    return NextResponse.json({ error: "Error deleting file." }, { status: 500 });
   }
 }

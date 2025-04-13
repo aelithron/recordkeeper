@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { existsSync, writeFileSync } from "fs";
+import { existsSync, writeFileSync, mkdirSync } from "fs";
 import { resolve, join } from "path";
 
-export async function PATCH(req: NextRequest) {
+export async function POST(req: NextRequest) {
   if (process.env.WEBEDITOR !== "true") {
     return NextResponse.json({ error: "Web editor is disabled." }, { status: 403 });
   }
@@ -16,10 +16,8 @@ export async function PATCH(req: NextRequest) {
     console.warn("Error parsing JSON (likely client's fault):", error);
     return NextResponse.json({ error: "Invalid JSON data/format!" }, { status: 400 });
   }
-  let { path } = body;
-  const { content } = body;
-  if (!path || !content) { return NextResponse.json({ error: "Path and content arguments are required." }, { status: 400 }); }
-  if (path === "/") { path = "index"; }
+  const { path } = body;
+  if (!path) { return NextResponse.json({ error: "Path argument is required." }, { status: 400 }); }
 
   const baseDir = resolve("wiki");
   const filePath = resolve(join(baseDir, `${decodeURIComponent(path)}.md`));
@@ -27,15 +25,19 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "Invalid path. Cannot write outside of /wiki." }, { status: 400 });
   }
 
-  if (!existsSync(filePath)) {
-    return NextResponse.json({ error: "File does not exist." }, { status: 404 });
+  if (existsSync(filePath)) {
+    return NextResponse.json({ error: "File already exists!" }, { status: 400 });
   }
 
   try {
-    writeFileSync(filePath, content);
-    return NextResponse.json({ message: "Successfully written content!" });
+    const dirPath = filePath.substring(0, filePath.lastIndexOf("/"));
+    if (path.includes("/") && !existsSync(dirPath)) {
+      mkdirSync(dirPath, { recursive: true });
+    }
+    writeFileSync(filePath, "### This file was just created!\nIf you are a visitor, please wait a few minutes for an editor to finish writing it.");
+    return NextResponse.json({ message: "Successfully created page!" });
   } catch (error) {
-    console.error("Error writing file:", error);
-    return NextResponse.json({ error: "Error writing file." }, { status: 500 });
+    console.error("Error creating file:", error);
+    return NextResponse.json({ error: "Error creating file." }, { status: 500 });
   }
 }

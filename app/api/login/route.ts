@@ -18,7 +18,9 @@ export async function POST(req: Request) {
       sameSite: 'strict',
       maxAge: 60 * 60 * 24 * 7,
     });
+    console.log(`[auth] Successful login attempt at ${Date.now} from IP`, ip);
     return res;
   }
+  console.log(`[auth] Failed login attempt at ${Date.now()} from IP`, ip);
   return NextResponse.json({ success: false }, { status: 401 });
 }
