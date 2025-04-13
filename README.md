@@ -60,6 +60,10 @@ If you are a Kubernetes user enabling the Web Editor: uncomment the Secret and s
 - Downloader (simple script that compiles all of the pages and turns them into a zip file for the user)
 ## Credits
 This project uses some [Font Awesome](https://fontawesome.com) and [Twemoji](https://github.com/twitter/twemoji) icons throughout.
+## Notes
+The phrase **"The wiki that loads pages in a blink."** is a marketing term, from when I noticed I could blink in roughly the same time it took for Recordkeeper to load a page.
+It requires that you are on a good connection, physically close to the server hosting Recordkeeper, and that the server also has a good connection and adequate CPU/RAM.
+However, due to our SSR-based loading for public pages as well as our low usage of React client components, we are one of (if not the) fastest wiki softwares out there.
 ## Support
-if you want support or need to ask any questions, feel free to dm me! @aelithron on discord, i should respond fairly quickly!
-(put support at the bottom because the readme explains most things fine, though i don't mind dms, even for simple questions.)
+if you want support or need to ask any questions, feel free to dm me! `@aelithron` on discord, i should respond fairly quickly!
+(i put support at the bottom because the readme explains most things fine, though i don't mind dms, even for simple questions.)
