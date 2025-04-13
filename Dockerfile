@@ -68,6 +68,9 @@ USER root
 EXPOSE 3000
 ENV PORT=3000
 
+ARG IMAGE_TAG="No Version Available"
+ENV IMAGE_TAG=${IMAGE_TAG:-"No Version Available"}
+
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/config/next-config-js/output
 ENV HOSTNAME="0.0.0.0"

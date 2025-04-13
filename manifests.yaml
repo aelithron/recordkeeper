@@ -1,0 +1,82 @@
+# Recordkeeper by Aelithron
+# This is all of the Kubernetes manifests for the project.
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: recordkeeper
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recordkeeper
+  namespace: recordkeeper
+  labels:
+    app: recordkeeper-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recordkeeper-app
+  template:
+    metadata:
+      labels:
+        app: recordkeeper-app
+    spec:
+      containers:
+      - name: recordkeeper
+        image: ghcr.io/aelithron/recordkeeper:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: WEBEDITOR
+          value: "false"
+        - name: WEBEDITOR_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: recordkeeper-webeditor
+              key: password
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        volumeMounts:
+        - mountPath: /app/wiki
+          name: recordkeeper-wiki
+      volumes:
+      - name: recordkeeper-wiki
+        hostPath:
+          path: /usr/share/recordkeeper/wiki
+          type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recordkeeper
+  namespace: recordkeeper
+spec:
+  selector:
+    app.kubernetes.io/name: recordkeeper
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: recordkeeper-webeditor
+#   namespace: recordkeeper
+# type: Opaque
+# data:
+#   password: <Set a password here (Base64-encoded)>
+# ---

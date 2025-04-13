@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import CreatePage from "./create.module";
 
 export const metadata: Metadata = {
-  title: "Edit Pages",
+  title: "Web Editor",
 }
 export const dynamic = 'force-dynamic';
 
