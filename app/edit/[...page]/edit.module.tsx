@@ -3,6 +3,7 @@ import { faMarkdown } from "@fortawesome/free-brands-svg-icons";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { getAuthHeader } from "@/lib/getAuthHeader";
 
 export default function EditPage({ pageContent, path }: { pageContent: string, path: string }) {
   const [content, setContent] = useState(pageContent);
@@ -14,7 +15,7 @@ export default function EditPage({ pageContent, path }: { pageContent: string, p
     }
     const response = await fetch("/api/page", {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...getAuthHeader() },
       body: JSON.stringify({ "path": path, "content": content }),
     });
     if (response.ok) {
@@ -30,7 +31,7 @@ export default function EditPage({ pageContent, path }: { pageContent: string, p
     }
   }
   return (
-    <form className="flex flex-col gap-2 justify-center items-center text-center">
+    <form className="flex flex-col gap-2 justify-center items-center text-center" onSubmit={handleSave}>
       <textarea
         className="w-full max-w-screen-md md:w-[200%] p-4 border border-gray-300 rounded-md"
         value={content}
@@ -42,7 +43,6 @@ export default function EditPage({ pageContent, path }: { pageContent: string, p
         <button
           type="submit"
           className="bg-green-500 text-white rounded-xl p-2 hover:text-sky-500"
-          
         >
           <FontAwesomeIcon icon={faSave} className="mr-2" />
           Save Changes

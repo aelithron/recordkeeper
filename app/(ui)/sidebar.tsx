@@ -23,6 +23,12 @@ export default function Sidebar({ pages, webEditorEnabled }: { pages: WikiLink[]
     <div className="bg-slate-500 flex flex-col gap-2 opacity-97 w-screen md:w-1/4 h-full fixed top-0 left-0 z-50 overflow-y-auto">
       <div className="flex justify-between">
         <button onClick={() => setIsOpen(!isOpen)} className="px-3 py-2 ml-4 mt-4 text-left hover:text-sky-500 text-white"><FontAwesomeIcon icon={faBars} /></button>
+        {webEditorEnabled && <Link
+          href={`/edit`}
+          className="flex items-center gap-2 text-white hover:text-sky-500 mt-4"
+          onClick={() => setIsOpen(false)}>
+          <FontAwesomeIcon icon={faPencil} />
+        </Link>}
         <a href="https://github.com/aelithron/recordkeeper" target="_blank" className="px-3 py-2 mr-4 mt-4 text-left hover:text-sky-500 text-white"><FontAwesomeIcon icon={faGithub} /></a>
       </div>
       <div className="flex items-center gap-2 justify-center mb-4">
@@ -60,12 +66,6 @@ export default function Sidebar({ pages, webEditorEnabled }: { pages: WikiLink[]
           </Link>}
         </div>
       ))}
-      {webEditorEnabled && <Link
-        href={`/edit`}
-        className="flex items-center gap-2 text-white hover:text-sky-500 ml-6"
-        onClick={() => setIsOpen(false)}>
-        <FontAwesomeIcon icon={faPencil} />
-      </Link>}
     </div>
   );
 }

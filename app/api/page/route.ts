@@ -3,6 +3,12 @@ import { existsSync, writeFileSync } from "fs";
 import { resolve, join } from "path";
 
 export async function PATCH(req: NextRequest) {
+  if (process.env.WEBEDITOR !== "true") {
+    return NextResponse.json({ error: "Web editor is disabled." }, { status: 403 });
+  }
+  if (!(req.headers.get("authorization") === ("Bearer " + process.env.WEBEDITOR_PASSWORD))) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   let body;
   try {
     body = await req.json();
