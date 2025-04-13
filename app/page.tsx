@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 
 export const metadata: Metadata = {
   title: "Home | Recordkeeper",
+  description: "A page on a simple, fast wiki."
 }
 export const dynamic = 'force-dynamic';
 

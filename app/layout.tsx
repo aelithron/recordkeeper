@@ -16,7 +16,22 @@ export const metadata: Metadata = {
     template: '%s | Recordkeeper',
     default: 'Recordkeeper',
   },
-  description: "A simple, fast wiki software.",
+  description: "A simple, fast wiki.",
+  openGraph: {
+    title: 'Recordkeeper',
+    description: 'A simple, fast wiki.',
+    siteName: 'Recordkeeper',
+    locale: 'en_US',
+    type: 'website',
+  },
+  category: "wiki",
+  keywords: [
+    "wiki",
+    "recordkeeper",
+    "documentation",
+    "knowledge base",
+    "open source",
+  ],
 };
 
 export default function RootLayout({
