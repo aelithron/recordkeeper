@@ -31,11 +31,11 @@ spec:
         env:
         - name: WEBEDITOR
           value: "false"
-        - name: WEBEDITOR_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: recordkeeper-webeditor
-              key: password
+        # - name: WEBEDITOR_PASSWORD
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: recordkeeper-webeditor
+        #      key: password
         livenessProbe:
           httpGet:
             path: /healthz
