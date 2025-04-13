@@ -12,16 +12,16 @@ metadata:
   name: recordkeeper
   namespace: recordkeeper
   labels:
-    app: recordkeeper-app
+    app: recordkeeper
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: recordkeeper-app
+      k8s-app: recordkeeper
   template:
     metadata:
       labels:
-        app: recordkeeper-app
+        k8s-app: recordkeeper
     spec:
       containers:
       - name: recordkeeper
@@ -65,7 +65,7 @@ metadata:
   namespace: recordkeeper
 spec:
   selector:
-    app.kubernetes.io/name: recordkeeper
+    k8s-app: recordkeeper
   ports:
     - protocol: TCP
       port: 3000
