@@ -18,11 +18,16 @@ export const metadata: Metadata = {
   },
   description: "A simple, fast wiki.",
   openGraph: {
-    title: 'Recordkeeper',
     description: 'A simple, fast wiki.',
     siteName: 'Recordkeeper',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://github.com/aelithron/recordkeeper/blob/main/app/opengraph-image.png?raw=true',
+        alt: 'Recordkeeper logo',
+      },
+    ],
   },
   category: "wiki",
   keywords: [
