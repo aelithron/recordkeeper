@@ -1,5 +1,6 @@
 # Recordkeeper
-A simple wiki software, based in Markdown.
+**The wiki that loads pages in a blink.**\
+A Markdown-based wiki, based around speed and simplicity.
 ## Introduction
 Recordkeeper was designed for the Not-yet-named Server, a Minecraft SMP.
 The name is inspired by the idea of a keeper of stories from eras past, or if you're so inclined, the history buff employee at the local library.
