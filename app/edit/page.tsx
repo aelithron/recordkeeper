@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ListPages from "./list.module";
 import { Metadata } from "next";
 import CreatePage from "./create.module";
+import Logout from "./logout.module";
 
 export const metadata: Metadata = {
   title: "Web Editor",
@@ -27,6 +28,8 @@ export default function Page() {
       <CreatePage />
       <p>Select a page to edit:</p>
       <ListPages pages={pages} />
+      <p className="text-slate-600">Logged in to the Web Editor - <Logout /></p>
     </div>
   )
 }
+
