@@ -55,7 +55,8 @@ Congrats on installing Recordkeeper! It will create a folder called `wiki`, whic
 #### Enabling the Web Editor
 If enabling the Web Editor, alter your installation method's Environment Variables to contain:
 - `WEBEDITOR_PASSWORD` set to a valid password
-- `WEBEDITOR` set to `true`\
+- `WEBEDITOR` set to `true`
+
 If you are a Kubernetes user enabling the Web Editor: uncomment the Secret and set a (Base64-encoded) password. Also, make sure to set `WEBEDITOR` to `"true"` in the Deployment's spec.
 ## Planned Features
 - Downloader (simple script that compiles all of the pages and turns them into a zip file for the user)
