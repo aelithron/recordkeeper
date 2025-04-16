@@ -1,19 +1,28 @@
 "use client";
+
+import { getAuthHeader } from "@/lib/getAuthHeader";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 export default function LoginForm() {
   const [password, setPassword] = useState<string>("");
-  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (password == "") {
+      alert("Please enter a password.");
+      return;
+    }
+    if (getAuthHeader().Authorization) {
+      alert("You are already logged in!");
+      return;
+    }
     const res = await fetch("/api/login", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ password }),
     });
     if (res.ok) {
-      router.push("/edit");
+      setPassword("");
+      window.location.href = "/edit";
     } else if (res.status === 401) {
       alert("Incorrect password!");
     } else if (res.status === 429) {

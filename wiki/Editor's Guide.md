@@ -23,4 +23,6 @@ Now that you have a Page open, you will see the "unparsed Markdown" in the box. 
 ## Deleting a Page
 For deleting pages, go back to the Editor from the step before. Click the red button that says "Delete Page' and confirm. Make sure you are deleting the correct page, as there is *no trash can* on the wiki, and deleted pages are **gone forever**.
 ## Renaming / Editing Page Paths
-These actions are not *currently* supported (though they may be in the future). Please use a terminal or file explorer on the computer hosting the wiki, or if not possible, copying the page contents and then deleting and recreating it.
+> Make sure to save before doing this! If you have unsaved content and move a page, it will be forgotten!
+
+Enter the Editor for a page, and click the button at the bottom of the page. It will give you a similar menu to the Create menu, but prefilled with the current page information. Follow the same instructions for the Create menu, then click the Move button. It will redirect you to the new location.

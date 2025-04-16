@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { getAuthHeader } from "@/lib/getAuthHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 
 export default function CreatePage() {
@@ -40,6 +40,7 @@ export default function CreatePage() {
         <input type="text" onChange={(e) => setPageName(e.target.value)} placeholder="Page Name" className="p-2 border-2 border-slate-700 bg-slate-600 text-white rounded-md" />
         <input type="text" onChange={(e) => setFolder(e.target.value)} placeholder="Folder (blank if root)" className="p-2 border-2 border-slate-700 bg-slate-600 text-white rounded-md" />
         <button type="submit" className="p-2 bg-emerald-500 border-emerald-600 border-2 rounded-full px-3">Create</button>
+        <button type="button" onClick={() => setIsOpen(!isOpen)} className="ml-2"><FontAwesomeIcon icon={faX} /></button>
       </form>}
     </div>
   )
