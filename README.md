@@ -62,6 +62,7 @@ If you are a Kubernetes user enabling the Web Editor: uncomment the Secret and s
 - Downloader (simple script that compiles all of the pages and turns them into a zip file for the user)
 - Enforce no subfolders (subfolders break the sidebar, so this will enforce the rule in the web editor API and make the sidebar ignore subfolders and their pages)
 - Built-in image hosting (either by implementing [my company's image server](https://github.com/blastoffwaters/static-content-server) or a custom Recordkeeper image server)
+- Unit testing (the project already contains Jest's infrastructure but doesn't yet have proper tests)
 ## Credits
 This project uses some [Font Awesome](https://fontawesome.com) and [Twemoji](https://github.com/twitter/twemoji) icons throughout.
 ## Notes
